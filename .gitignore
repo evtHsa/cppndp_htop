@@ -1,7 +1,12 @@
 monitor
+Makefile
 a.out
 settings.json
 *.o
 build/*
 *.json
 .github/**
+CMakeCache.txt
+CMakefiles
+cmake_install.cmake
+CMakeFiles/
