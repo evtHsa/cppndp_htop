@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include <cassert> // TODO:FIXME: remove this
-
+#include <sstream>
+#include <iostream>
 #include "linux_parser.h"
 
 using std::stof;
@@ -91,7 +92,30 @@ long LinuxParser::ActiveJiffies() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0
 long LinuxParser::IdleJiffies() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
 
 // TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return {}; }
+vector<string> LinuxParser::CpuUtilization() { 
+  string line, token, key;
+  vector<string> tokens;
+  std::ifstream stream(kProcDirectory + kStatFilename);
+
+  if (!stream.is_open()) {
+    std::cerr << "could not open" << kProcDirectory << kStatFilename;
+    return tokens;
+  }
+
+  // get one line. if it's "cpu" line, tokenize it
+  std::getline(stream, line);
+  std::istringstream linestream(line);
+  linestream >> key;
+  if (key != "cpu")  {
+    std::cerr << "invalid line from" << kProcDirectory << kStatFilename;
+    return tokens;
+  }
+
+  while (linestream >> token)
+      tokens.push_back(token);
+  
+  return tokens;
+}
 
 // TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
