@@ -31,7 +31,7 @@ std::string System::Kernel() { return string(LinuxParser::OperatingSystem()); }
 float System::MemoryUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0.0; }
 
 // TODO: Return the operating system name
-std::string System::OperatingSystem() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
+std::string System::OperatingSystem() { return string(LinuxParser::OperatingSystem()); }
 
 // TODO: Return the number of processes actively running on the system
 int System::RunningProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
