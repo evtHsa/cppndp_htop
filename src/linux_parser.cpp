@@ -76,7 +76,20 @@ float LinuxParser::MemoryUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]"
 long LinuxParser::UpTime() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
 
 // TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+long LinuxParser::Jiffies() {
+  // TODO:FIXME:071625
+  vector<string> values = LinuxParser::CpuUtilization();
+  vector<long> valueslong(10, 0);
+  long total = 0;
+  vector<CPUStates> all = {kUser_, kNice_, kSystem_, kIdle_, kIOwait_, kIRQ_, kSoftIRQ_, kSteal_};
+  for (int i : all) { // All non-guest values
+    valueslong[i] = stol(values[i]);
+    total += valueslong[i];
+  };
+  return total;
+   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
+   return 0; 
+}
 
 // TODO: Read and return the number of active jiffies for a PID
 long LinuxParser::ActiveJiffies(int pid) { 
