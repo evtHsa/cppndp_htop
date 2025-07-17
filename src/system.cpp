@@ -8,6 +8,7 @@
 #include "process.h"
 #include "processor.h"
 #include "system.h"
+#include "linux_parser.h"
 
 using std::set;
 using std::size_t;
@@ -18,7 +19,7 @@ using std::vector;
 You need to properly format the uptime. Refer to the comments mentioned in format. cpp for formatting the uptime.*/
 
 // TODO: Return the system's CPU
-Processor& System::Cpu() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return cpu_; }
+Processor& System::Cpu() { return cpu_; }
 
 // TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return processes_; }
