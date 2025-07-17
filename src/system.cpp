@@ -25,7 +25,7 @@ Processor& System::Cpu() { return cpu_; }
 vector<Process>& System::Processes() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return processes_; }
 
 // TODO: Return the system's kernel identifier (string)
-std::string System::Kernel() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
+std::string System::Kernel() { return string(LinuxParser::OperatingSystem()); }
 
 // TODO: Return the system's memory utilization
 float System::MemoryUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0.0; }
