@@ -92,14 +92,19 @@ long LinuxParser::Jiffies() {
 }
 
 // TODO: Read and return the number of active jiffies for a PID
-long LinuxParser::ActiveJiffies(int pid) { 
-  pid ++;
-  assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
+long LinuxParser::ActiveJiffies(int pid) {
+  pid++;
   return 0; 
   }
 
 // TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+long LinuxParser::ActiveJiffies() { 
+  vector<std::string> jiffies = CpuUtilization();
+  long total = 0;
+  for (int i = kState_min_  ; i <= kState_max_;i ++)
+    total += std::stol(jiffies[i]);
+  return total; 
+}
 
 // TODO: Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
