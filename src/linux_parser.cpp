@@ -69,8 +69,21 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
+float LinuxParser::GetMemInfo(std::string key)
+{
+  int FIXME = key.length();
+  FIXME++;
+  assert("TODO:FIXME:pid[[maybe_unused]]" == 0); 
+}
+
 // TODO: Read and return the system memory utilization
-float LinuxParser::MemoryUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0.0; }
+float LinuxParser::MemoryUtilization() { 
+  float total = GetMemInfo("MemTotal:");
+  float free = GetMemInfo("MemFree:");
+
+  assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
+  return (total - free)/ total; 
+}
 
 // TODO: Read and return the system uptime
 long LinuxParser::UpTime() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
