@@ -69,20 +69,32 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-float LinuxParser::GetMemInfo(std::string key)
+int LinuxParser::GetMemInfo(std::string ikey)
 {
-  int FIXME = key.length();
-  FIXME++;
-  assert("TODO:FIXME:pid[[maybe_unused]]" == 0); 
+  string line, key, units;
+  int val = 0;
+  std::ifstream ifstrm(kProcDirectory+kMeminfoFilename);
+
+  if (!ifstrm.is_open())
+    return val;
+
+  while (getline(ifstrm, line)) {
+    std::istringstream strstrm(line);
+    while (strstrm >> key >> val >> units) {
+      if (ikey == key)
+        return val;
+    }
+  }
+
+  return val;
 }
 
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() { 
-  float total = GetMemInfo("MemTotal:");
-  float free = GetMemInfo("MemFree:");
+  int  total = GetMemInfo("MemTotal:");
+  int free = GetMemInfo("MemFree:");
 
-  assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-  return (total - free)/ total; 
+  return ((float)(total - free))/ total; 
 }
 
 // TODO: Read and return the system uptime

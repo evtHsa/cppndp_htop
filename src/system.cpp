@@ -30,7 +30,6 @@ std::string System::Kernel() { return string(LinuxParser::OperatingSystem()); }
 // TODO: Return the system's memory utilization
 float System::MemoryUtilization() { 
     float ret = LinuxParser::MemoryUtilization();
-    assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
     return ret; 
 }
 
