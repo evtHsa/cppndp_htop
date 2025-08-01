@@ -28,7 +28,11 @@ vector<Process>& System::Processes() { assert("TODO:FIXME:pid[[maybe_unused]]" =
 std::string System::Kernel() { return string(LinuxParser::OperatingSystem()); }
 
 // TODO: Return the system's memory utilization
-float System::MemoryUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0.0; }
+float System::MemoryUtilization() { 
+    float ret = LinuxParser::MemoryUtilization();
+    assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
+    return ret; 
+}
 
 // TODO: Return the operating system name
 std::string System::OperatingSystem() { return string(LinuxParser::OperatingSystem()); }
