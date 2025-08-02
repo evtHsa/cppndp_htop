@@ -11,6 +11,10 @@ using std::string;
 using std::to_string;
 using std::vector;
 
+Process::Process(int pid){
+      pid_ = pid;
+}
+
 // TODO: Return this process's ID
 int Process::Pid() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
 
