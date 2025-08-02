@@ -109,16 +109,22 @@ int LinuxParser::GetMemInfo(std::string ikey)
         return val;
     }
   }
-
   return val;
 }
 
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() { 
-  int  total = GetMemInfo("MemTotal:");
-  int free = GetMemInfo("MemFree:");
+  std::vector<std::string> v;
+  float total, free, ret;
 
-  return ((float)(total - free))/ total; 
+  GetKeyedValues(kMeminfoFilename, v, "MemTotal:", 1);
+  total = std::stof(v.front());
+  v.clear();
+  std::cout << "float:" << total << std::endl;
+  GetKeyedValues(kMeminfoFilename, v, "MemFree:", 1);
+  free = std::stof(v.front());
+  ret = (total - free) / total; ret = ret;
+  return (total - free) / total; 
 }
 
 // TODO: Read and return the system uptime
