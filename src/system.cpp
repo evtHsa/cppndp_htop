@@ -40,7 +40,8 @@ std::string System::OperatingSystem() { return string(LinuxParser::OperatingSyst
 int System::RunningProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
 
 // TODO: Return the total number of processes on the system
-int System::TotalProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+int System::TotalProcesses() {
+    return LinuxParser::TotalProcesses(); }
 
 // TODO: Return the number of seconds since the system started running
 long int System::UpTime() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
