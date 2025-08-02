@@ -69,6 +69,11 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
+bool LinuxParser::GetKeyedValues(string fname, vector<string> &ret, int max_values) {
+  if (ret == ret) {fname = fname;max_values = max_values;} // FIXME
+  return false;
+}
+
 int LinuxParser::GetMemInfo(std::string ikey)
 {
   string line, key, units;
