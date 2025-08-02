@@ -69,6 +69,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
+// ikey == "" means "match first line and there is no key"
 void LinuxParser::GetKeyedValues(string fname, vector<string> &ret, std::string ikey, 
                                  unsigned int max_values) 
 {
@@ -83,10 +84,14 @@ void LinuxParser::GetKeyedValues(string fname, vector<string> &ret, std::string 
     std::string key;
 
     while (strstrm >> key) {
-      if (ikey == key){
+      if (ikey == "") {
+        ret.push_back(key);
+      }
+      if (ikey == key || ikey == ""){
         while (strstrm >> val) {
-            ret.push_back(val);
-            if (ret.size() == max_values) break;
+          if (ret.size() == max_values)
+            return;
+          ret.push_back(val);
         }
       }
     }
