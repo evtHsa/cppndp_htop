@@ -112,8 +112,12 @@ float LinuxParser::MemoryUtilization() {
   return (total - free) / total; 
 }
 
-// TODO: Read and return the system uptime
-long LinuxParser::UpTime() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+// Read and return the system uptime
+long LinuxParser::UpTime() {
+  std::vector<std::string> v;
+  LinuxParser::GetKeyedValues(kUptimeFilename, v, "", 1); // if we changed 1 to 2, we'd also get idle time
+  return std::stol(v.front()); 
+}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() {
