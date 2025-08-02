@@ -170,8 +170,12 @@ vector<string> LinuxParser::CpuUtilization() {
   return tokens;
 }
 
-// TODO: Read and return the total number of processes
-int LinuxParser::TotalProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+// Read and return the total number of processes
+int LinuxParser::TotalProcesses() {
+  std::vector<std::string> v;
+  GetKeyedValues(kStatFilename, v, "processes", 1);
+  return std::stoi(v.front()); 
+}
 
 // TODO: Read and return the number of running processes
 int LinuxParser::RunningProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
