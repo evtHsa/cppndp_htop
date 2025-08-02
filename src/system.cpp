@@ -36,8 +36,10 @@ float System::MemoryUtilization() {
 // TODO: Return the operating system name
 std::string System::OperatingSystem() { return string(LinuxParser::OperatingSystem()); }
 
-// TODO: Return the number of processes actively running on the system
-int System::RunningProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+// Return the number of processes actively running on the system
+int System::RunningProcesses() {
+    return LinuxParser::RunningProcesses();
+}
 
 // TODO: Return the total number of processes on the system
 int System::TotalProcesses() {

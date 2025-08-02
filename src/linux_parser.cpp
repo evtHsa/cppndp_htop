@@ -186,8 +186,12 @@ int LinuxParser::TotalProcesses() {
   return std::stoi(v.front()); 
 }
 
-// TODO: Read and return the number of running processes
-int LinuxParser::RunningProcesses() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+// Read and return the number of running processes
+int LinuxParser::RunningProcesses() {
+  std::vector<std::string> v;
+  GetKeyedValues(kStatFilename, v, "procs_running", 1);
+  return std::stoi(v.front()); 
+}
 
 // TODO: Read and return the command associated with a process
 string LinuxParser::Command(int pid) {
