@@ -22,7 +22,6 @@ const std::string kPasswordPath{"/etc/passwd"};
 float MemoryUtilization();
 void GetKeyedValues(std::string fname, std::vector<std::string> &ret, std::string ikey, 
                     unsigned int max_values);
-int GetMemInfo(std::string key);
 long UpTime();
 std::vector<int> Pids();
 int TotalProcesses();

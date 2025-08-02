@@ -93,37 +93,17 @@ void LinuxParser::GetKeyedValues(string fname, vector<string> &ret, std::string 
   }
 }
 
-int LinuxParser::GetMemInfo(std::string ikey)
-{
-  string line, key, units;
-  int val = 0;
-  std::ifstream ifstrm(kProcDirectory+kMeminfoFilename);
-
-  if (!ifstrm.is_open())
-    return val;
-
-  while (getline(ifstrm, line)) {
-    std::istringstream strstrm(line);
-    while (strstrm >> key >> val >> units) {
-      if (ikey == key)
-        return val;
-    }
-  }
-  return val;
-}
-
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() { 
   std::vector<std::string> v;
-  float total, free, ret;
+  float total, free;
 
   GetKeyedValues(kMeminfoFilename, v, "MemTotal:", 1);
   total = std::stof(v.front());
   v.clear();
-  std::cout << "float:" << total << std::endl;
+
   GetKeyedValues(kMeminfoFilename, v, "MemFree:", 1);
   free = std::stof(v.front());
-  ret = (total - free) / total; ret = ret;
   return (total - free) / total; 
 }
 
