@@ -69,9 +69,28 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-bool LinuxParser::GetKeyedValues(string fname, vector<string> &ret, int max_values) {
-  if (ret == ret) {fname = fname;max_values = max_values;} // FIXME
-  return false;
+void LinuxParser::GetKeyedValues(string fname, vector<string> &ret, std::string ikey, 
+                                 unsigned int max_values) 
+{
+  std::string line, val;
+  std::ifstream ifstrm(kProcDirectory+fname);
+
+   if (!ifstrm.is_open())
+    return;
+
+   while (getline(ifstrm, line)) {
+    std::istringstream strstrm(line);
+    std::string key;
+
+    while (strstrm >> key) {
+      if (ikey == key){
+        while (strstrm >> val) {
+            ret.push_back(val);
+            if (ret.size() == max_values) break;
+        }
+      }
+    }
+  }
 }
 
 int LinuxParser::GetMemInfo(std::string ikey)
