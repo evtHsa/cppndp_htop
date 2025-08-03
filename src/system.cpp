@@ -30,7 +30,7 @@ vector<Process>& System::Processes() {
         Process p(pid);
         processes_.push_back(p);
     }
-    assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
+    std::sort(processes_.begin(), processes_.end());
     return processes_;
 }
 
