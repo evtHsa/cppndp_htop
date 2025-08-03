@@ -31,16 +31,17 @@ string Process::Command() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return
 string Process::Ram() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
 
 // TODO: Return the user (name) that generated this process
-string Process::User() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
+string Process::User() {
+      return LinuxParser::User(pid_);
+}
 
 // TODO: Return the age of this process (in seconds)
-long int Process::UpTime() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+long int Process::UpTime() {
+       return LinuxParser::UpTime(pid_);
+}
 
 // TODO: Overload the "less than" comparison operator for Process objects
 bool Process::operator<(Process const& a) const 
 {
-   Process b;
-   b = a;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return true;
+   return a.pid_ < this->pid_;
 }

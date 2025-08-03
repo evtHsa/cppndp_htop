@@ -202,11 +202,12 @@ string LinuxParser::Ram(int pid) {
    return string();
 }
 
-// TODO: Read and return the user ID associated with a process
+// Read and return the user ID associated with a process
 string LinuxParser::Uid(int pid) {
-   pid ++;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return string();
+  std::vector<std::string> v;
+  std::string fname = std::to_string(pid) + kStatusFilename;
+  GetKeyedValues(fname, v, "Uid:");
+  return string();
 }
 
 // Read and return the user associated with a process
