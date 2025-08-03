@@ -70,8 +70,9 @@ vector<int> LinuxParser::Pids() {
 }
 
 // ikey == "" means "match first line and there is no key"
-void LinuxParser::GetKeyedValues(string fname, vector<string> &ret, std::string ikey, 
-                                 unsigned int max_values) 
+// previous contents of tokens will be cleared
+void LinuxParser::GetKeyedValues(string fname, vector<string> &tokens, std::string ikey, 
+                                 unsigned int key_col) 
 {
   std::string line, val;
   std::ifstream ifstrm(kProcDirectory+fname);
@@ -81,21 +82,15 @@ void LinuxParser::GetKeyedValues(string fname, vector<string> &ret, std::string 
 
    while (getline(ifstrm, line)) {
     std::istringstream strstrm(line);
-    std::string key;
+    std::string token;
 
-    while (strstrm >> key) {
-      if (ikey == "") {
-        ret.push_back(key);
-      }
-      if (ikey == key || ikey == ""){
-        while (strstrm >> val) {
-          if (ret.size() == max_values)
-            return;
-          ret.push_back(val);
-        }
-      }
-    }
-  }
+    // vectorize all tokens
+    tokens.clear();
+    while (strstrm >> token) 
+      tokens.push_back(token);
+  if (ikey == tokens[key_col] || ikey == "")
+    return;
+   }
 }
 
 // TODO: Read and return the system memory utilization
@@ -103,20 +98,20 @@ float LinuxParser::MemoryUtilization() {
   std::vector<std::string> v;
   float total, free;
 
-  GetKeyedValues(kMeminfoFilename, v, "MemTotal:", 1);
-  total = std::stof(v.front());
+  GetKeyedValues(kMeminfoFilename, v, "MemTotal:");
+  total = std::stof(v[1]);
   v.clear();
 
-  GetKeyedValues(kMeminfoFilename, v, "MemFree:", 1);
-  free = std::stof(v.front());
+  GetKeyedValues(kMeminfoFilename, v, "MemFree:");
+  free = std::stof(v[1]);
   return (total - free) / total; 
 }
 
 // Read and return the system uptime
 long LinuxParser::UpTime() {
   std::vector<std::string> v;
-  LinuxParser::GetKeyedValues(kUptimeFilename, v, "", 1); // if we changed 1 to 2, we'd also get idle time
-  return std::stol(v.front()); 
+  LinuxParser::GetKeyedValues(kUptimeFilename, v, ""); 
+  return std::stol(v[1]); 
 }
 
 // TODO: Read and return the number of jiffies for the system
@@ -182,15 +177,15 @@ vector<string> LinuxParser::CpuUtilization() {
 // Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
   std::vector<std::string> v;
-  GetKeyedValues(kStatFilename, v, "processes", 1);
-  return std::stoi(v.front()); 
+  GetKeyedValues(kStatFilename, v, "processes");
+  return std::stoi(v[1]); 
 }
 
 // Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
   std::vector<std::string> v;
-  GetKeyedValues(kStatFilename, v, "procs_running", 1);
-  return std::stoi(v.front()); 
+  GetKeyedValues(kStatFilename, v, "procs_running");
+  return std::stoi(v[1]); 
 }
 
 // TODO: Read and return the command associated with a process
@@ -214,8 +209,9 @@ string LinuxParser::Uid(int pid) {
    return string();
 }
 
-// TODO: Read and return the user associated with a process
+// Read and return the user associated with a process
 string LinuxParser::User(int pid) {
+  string uid = Uid(pid);
    pid ++;
    assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
    return string();
