@@ -22,6 +22,7 @@ const std::string kPasswordPath{"/etc/passwd"};
 float MemoryUtilization();
 void GetKeyedValues(std::string dir, std::string fname, std::vector<std::string> &ret, std::string ikey, 
                     unsigned int key_col = 0);
+void tokenize(std::vector<std::string> tokens, std::string instr, char delim);
 long UpTime();
 std::vector<int> Pids();
 int TotalProcesses();
