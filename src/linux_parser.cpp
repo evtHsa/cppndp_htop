@@ -71,11 +71,11 @@ vector<int> LinuxParser::Pids() {
 
 // ikey == "" means "match first line and there is no key"
 // previous contents of tokens will be cleared
-void LinuxParser::GetKeyedValues(string fname, vector<string> &tokens, std::string ikey, 
+void LinuxParser::GetKeyedValues(string dir, string fname, vector<string> &tokens, std::string ikey, 
                                  unsigned int key_col) 
 {
   std::string line, val;
-  std::ifstream ifstrm(kProcDirectory+fname);
+  std::ifstream ifstrm(dir+fname);
 
    if (!ifstrm.is_open())
     return;
@@ -98,11 +98,11 @@ float LinuxParser::MemoryUtilization() {
   std::vector<std::string> v;
   float total, free;
 
-  GetKeyedValues(kMeminfoFilename, v, "MemTotal:");
+  GetKeyedValues(kProcDirectory, kMeminfoFilename, v, "MemTotal:");
   total = std::stof(v[1]);
   v.clear();
 
-  GetKeyedValues(kMeminfoFilename, v, "MemFree:");
+  GetKeyedValues(kProcDirectory, kMeminfoFilename, v, "MemFree:");
   free = std::stof(v[1]);
   return (total - free) / total; 
 }
@@ -110,7 +110,7 @@ float LinuxParser::MemoryUtilization() {
 // Read and return the system uptime
 long LinuxParser::UpTime() {
   std::vector<std::string> v;
-  LinuxParser::GetKeyedValues(kUptimeFilename, v, ""); 
+  LinuxParser::GetKeyedValues(kProcDirectory, kUptimeFilename, v, ""); 
   return std::stol(v[1]); 
 }
 
@@ -177,14 +177,14 @@ vector<string> LinuxParser::CpuUtilization() {
 // Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
   std::vector<std::string> v;
-  GetKeyedValues(kStatFilename, v, "processes");
+  GetKeyedValues(kProcDirectory, kStatFilename, v, "processes");
   return std::stoi(v[1]); 
 }
 
 // Read and return the number of running processes
 int LinuxParser::RunningProcesses() {
   std::vector<std::string> v;
-  GetKeyedValues(kStatFilename, v, "procs_running");
+  GetKeyedValues(kProcDirectory, kStatFilename, v, "procs_running");
   return std::stoi(v[1]); 
 }
 
@@ -206,8 +206,8 @@ string LinuxParser::Ram(int pid) {
 string LinuxParser::Uid(int pid) {
   std::vector<std::string> v;
   std::string fname = std::to_string(pid) + kStatusFilename;
-  GetKeyedValues(fname, v, "Uid:");
-  return string();
+  GetKeyedValues(kProcDirectory, fname, v, "Uid:");
+  return v[1];
 }
 
 // Read and return the user associated with a process
