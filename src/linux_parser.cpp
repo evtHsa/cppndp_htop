@@ -229,9 +229,13 @@ string LinuxParser::Uid(int pid) {
 // Read and return the user associated with a process
 string LinuxParser::User(int pid) {
   string uid = Uid(pid);
-   pid ++;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return string();
+  std::vector<std::string> v;
+  std::string frame("/etc/passwd");
+  std::vector<std::string> tokens;
+
+  GetKeyedValues("/etc/", "passwd", v, uid);
+  tokenize(tokens, v[0], ':');
+  return v[0];
 }
 
 // TODO: Read and return the uptime of a process
