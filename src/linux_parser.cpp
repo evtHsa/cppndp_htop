@@ -69,6 +69,22 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
+// in a delimeted string and delimiter, out vector of delimited sub strings
+void LinuxParser::tokenize(std::vector<std::string> tokens, std::string instr, char delim)
+{
+  tokens.clear();
+  size_t start = 0;
+  size_t end = instr.find(delim);
+    
+    while (end != std::string::npos) {
+        tokens.push_back(instr.substr(start, end - start));
+        start = end + 1;
+        end = instr.find(delim, start);
+    }
+    tokens.push_back(instr.substr(start)); // last token
+    return;
+}
+
 // ikey == "" means "match first line and there is no key"
 // previous contents of tokens will be cleared
 void LinuxParser::GetKeyedValues(string dir, string fname, vector<string> &tokens, std::string ikey, 
