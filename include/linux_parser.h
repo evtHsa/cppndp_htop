@@ -20,7 +20,7 @@ const std::string kPasswordPath{"/etc/passwd"};
 
 // System
 float MemoryUtilization();
-void GetKeyedValues(std::string fname, std::vector<std::string> &ret, std::string ikey, 
+void GetKeyedValues(std::string dir, std::string fname, std::vector<std::string> &ret, std::string ikey, 
                     unsigned int key_col = 0);
 long UpTime();
 std::vector<int> Pids();
