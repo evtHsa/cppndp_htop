@@ -3,7 +3,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cassert> // TODO:FIXME: remove this
 #include <sstream>
 #include <iostream>
 #include "linux_parser.h"
@@ -142,8 +141,7 @@ long LinuxParser::Jiffies() {
     total += valueslong[i];
   };
   return total;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return 0; 
+
 }
 
 // TODO: Read and return the number of active jiffies for a PID
@@ -216,7 +214,6 @@ string LinuxParser::Uid(int pid) {
 string LinuxParser::User(int pid) {
   string uid = Uid(pid);
   std::vector<std::string> v;
-  std::string frame("/etc/passwd");
   std::vector<std::string> tokens;
 
   GetKeyedValues("/etc/", "passwd", v, uid);
