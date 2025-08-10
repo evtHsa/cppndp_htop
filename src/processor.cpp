@@ -3,7 +3,7 @@
 
 // Return the aggregate CPU utilization
 float Processor::Utilization() { 
-    long total = LinuxParser::Jiffies(); // TODO: is this int64 which i think /proc/stat uses?
+    long total = LinuxParser::Jiffies();
     long active = LinuxParser::ActiveJiffies();
     float ret;
     ret = (float)active / total;
