@@ -108,7 +108,7 @@ void LinuxParser::GetKeyedValues(string dir, string fname, vector<string> &token
    }
 }
 
-// TODO: Read and return the system memory utilization
+// Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() { 
   std::vector<std::string> v;
   float total, free;
@@ -129,9 +129,8 @@ long LinuxParser::UpTime() {
   return std::stol(v[1]); 
 }
 
-// TODO: Read and return the number of jiffies for the system
+// : Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() {
-  // TODO:FIXME:071625
   vector<string> values = LinuxParser::CpuUtilization();
   vector<long> valueslong(10, 0);
   long total = 0;
@@ -144,13 +143,7 @@ long LinuxParser::Jiffies() {
 
 }
 
-// TODO: Read and return the number of active jiffies for a PID
-long LinuxParser::ActiveJiffies(int pid) {
-  pid++;
-  return 0; 
-  }
-
-// TODO: Read and return the number of active jiffies for the system
+/// TODO: Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() { 
   vector<std::string> jiffies = CpuUtilization();
   long total = 0;
