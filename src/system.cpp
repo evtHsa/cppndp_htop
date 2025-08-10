@@ -13,14 +13,14 @@ using std::set;
 using std::size_t;
 using std::string;
 using std::vector;
-/*You need to complete the mentioned TODOs in order to satisfy the rubric criteria "The student will be able to extract and display basic data about the system."
+/*You need to complete the mentioned s in order to satisfy the rubric criteria "The student will be able to extract and display basic data about the system."
 
 You need to properly format the uptime. Refer to the comments mentioned in format. cpp for formatting the uptime.*/
 
-// TODO: Return the system's CPU
+// Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
+//  Return a container composed of the system's processes
 vector<Process>& System::Processes() {
     std::vector<int> pids = LinuxParser::Pids();
 
@@ -33,16 +33,16 @@ vector<Process>& System::Processes() {
     return processes_;
 }
 
-// TODO: Return the system's kernel identifier (string)
+// Return the system's kernel identifier (string)
 std::string System::Kernel() { return string(LinuxParser::OperatingSystem()); }
 
-// TODO: Return the system's memory utilization
+// Return the system's memory utilization
 float System::MemoryUtilization() { 
     float ret = LinuxParser::MemoryUtilization();
     return ret; 
 }
 
-// TODO: Return the operating system name
+// Return the operating system name
 std::string System::OperatingSystem() { return string(LinuxParser::OperatingSystem()); }
 
 // Return the number of processes actively running on the system
@@ -50,7 +50,7 @@ int System::RunningProcesses() {
     return LinuxParser::RunningProcesses();
 }
 
-// TODO: Return the total number of processes on the system
+// Return the total number of processes on the system
 int System::TotalProcesses() {
     return LinuxParser::TotalProcesses(); }
 

@@ -3,25 +3,23 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cassert> // TODO:FIXME
-
 #include "process.h"
 #include "linux_parser.h"
 
 using std::string;
 using std::to_string;
 using std::vector;
-
+#include <iostream> // FIXME: get rid of this when not using cout for debug
 Process::Process(int pid){
       pid_ = pid;
 }
 
-// TODO: Return this process's ID
+// Return this process's ID
 int Process::Pid() {
       return pid_; 
 }
 
-// TODO: Return this process's CPU utilization
+// Return this process's CPU utilization
 float Process::CpuUtilization() {
       std::vector<std::string> v;
       std::string fname = std::to_string(pid_) + LinuxParser::kStatFilename;
