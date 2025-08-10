@@ -240,7 +240,11 @@ string LinuxParser::User(int pid) {
 
 // TODO: Read and return the uptime of a process
 long LinuxParser::UpTime(int pid) {
-   pid ++;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return pid;
+  std::vector<std::string> v;
+  long ret;
+  GetKeyedValues(kProcDirectory + std::to_string(pid) + "/", kStatFilename, v, "");
+  // https://man7.org/linux/man-pages/man5/proc_pid_stat.5.html
+  ret = std::stol(v[21]);
+  ret /= sysconf(_SC_CLK_TCK); // convert to seconds
+  return ret;
 }

@@ -22,7 +22,8 @@ int Process::Pid() {
 }
 
 // TODO: Return this process's CPU utilization
-float Process::CpuUtilization() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+float Process::CpuUtilization() {
+      long pid_uptime = LinuxParser::UpTime(pid_);
 
 // TODO: Return the command that generated this process
 string Process::Command() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
