@@ -161,8 +161,8 @@ long LinuxParser::ActiveJiffies() {
   return total; 
 }
 
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return 0; }
+// Read and return the number of idle jiffies for the system
+// NOT DONE: removed because never called
 
 // TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { 
@@ -202,20 +202,6 @@ int LinuxParser::RunningProcesses() {
   std::vector<std::string> v;
   GetKeyedValues(kProcDirectory, kStatFilename, v, "procs_running");
   return std::stoi(v[1]); 
-}
-
-// TODO: Read and return the command associated with a process
-string LinuxParser::Command(int pid) {
-   pid ++;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return string();
-}
-
-// TODO: Read and return the memory used by a process
-string LinuxParser::Ram(int pid) {
-   pid ++;
-   assert("TODO:FIXME:pid[[maybe_unused]]" == 0);
-   return string();
 }
 
 // Read and return the user ID associated with a process
