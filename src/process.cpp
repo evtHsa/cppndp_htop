@@ -28,8 +28,13 @@ float Process::CpuUtilization() {
 // TODO: Return the command that generated this process
 string Process::Command() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
 
-// TODO: Return this process's memory utilization
-string Process::Ram() { assert("TODO:FIXME:pid[[maybe_unused]]" == 0);return string(); }
+// Return this process's memory utilization
+string Process::Ram() {
+      std::vector<std::string> v;
+      std::string fname = std::to_string(pid_) + LinuxParser::kStatusFilename;
+      LinuxParser::GetKeyedValues(LinuxParser::kProcDirectory, fname, v, "VmRSS:");
+      return string(v[1]); 
+}
 
 // TODO: Return the user (name) that generated this process
 string Process::User() {
