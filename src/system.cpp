@@ -2,7 +2,6 @@
 #include <cstddef>
 #include <set>
 #include <string>
-#include <cassert> // TODO:FIXME
 #include <vector>
 
 #include "process.h"
