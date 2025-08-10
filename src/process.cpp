@@ -36,7 +36,7 @@ string Process::Ram() {
       return string(v[1]); 
 }
 
-// TODO: Return the user (name) that generated this process
+// Return the user (name) that generated this process
 string Process::User() {
       return LinuxParser::User(pid_);
 }
