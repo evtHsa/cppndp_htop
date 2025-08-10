@@ -16,12 +16,12 @@ Process::Process(int pid){
       pid_ = pid;
 }
 
-// TODO: Return this process's ID
+// Return this process's ID
 int Process::Pid() {
       return pid_; 
 }
 
-// TODO: Return this process's CPU utilization
+// Return this process's CPU utilization
 float Process::CpuUtilization() {
       std::vector<std::string> v;
       std::string fname = std::to_string(pid_) + LinuxParser::kStatFilename;
