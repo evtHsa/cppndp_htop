@@ -41,7 +41,7 @@ string Process::User() {
       return LinuxParser::User(pid_);
 }
 
-// TODO: Return the age of this process (in seconds)
+// Return the age of this process (in seconds)
 long int Process::UpTime() {
        return LinuxParser::UpTime(pid_);
 }
