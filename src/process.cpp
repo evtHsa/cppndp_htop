@@ -3,8 +3,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cassert> // TODO:FIXME
-
 #include "process.h"
 #include "linux_parser.h"
 
