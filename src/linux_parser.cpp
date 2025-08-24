@@ -183,9 +183,13 @@ vector<string> LinuxParser::CpuUtilization() {
 
 // Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
+  int ret;
   std::vector<std::string> v;
-  GetKeyedValues(kProcDirectory, kStatFilename, v, "processes");
-  return std::stoi(v[1]); 
+  GetKeyedValues(kProcDirectory, kStatFilename, v, "procs_running");
+  ret = stol(v[1]);
+  GetKeyedValues(kProcDirectory, kStatFilename, v, "procs_blocked");
+  ret += stol(v[1]);
+  return ret; 
 }
 
 // Read and return the number of running processes
