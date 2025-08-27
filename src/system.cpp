@@ -36,7 +36,7 @@ vector<Process>& System::Processes() {
 }
 
 // Return the system's kernel identifier (string)
-std::string System::Kernel() { return string(LinuxParser::OperatingSystem()); }
+std::string System::Kernel() { return string(LinuxParser::Kernel()); }
 
 // Return the system's memory utilization
 float System::MemoryUtilization() { 
