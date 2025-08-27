@@ -9,7 +9,6 @@
 using std::string;
 using std::to_string;
 using std::vector;
-#include <iostream> // FIXME: get rid of this when not using cout for debug
 Process::Process(int pid){
       pid_ = pid;
 }
