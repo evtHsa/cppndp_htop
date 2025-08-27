@@ -143,7 +143,7 @@ long LinuxParser::Jiffies() {
 
 }
 
-/// TODO: Read and return the number of active jiffies for the system
+// Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() { 
   vector<std::string> jiffies = CpuUtilization();
   long total = 0;
@@ -155,7 +155,7 @@ long LinuxParser::ActiveJiffies() {
 // Read and return the number of idle jiffies for the system
 // NOT DONE: removed because never called
 
-// TODO: Read and return CPU utilization
+// : Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { 
   string line, token, key;
   vector<string> tokens;
@@ -218,7 +218,7 @@ string LinuxParser::User(int pid) {
   return v[0];
 }
 
-// TODO: Read and return the uptime of a process
+// Read and return the uptime of a process
 long LinuxParser::UpTime(int pid) {
   std::vector<std::string> v;
   long ret;
