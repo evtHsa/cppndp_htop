@@ -131,7 +131,7 @@ long LinuxParser::UpTime() {
 
 // : Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() {
-  vector<string> values = LinuxParser::CpuUtilization();
+  vector<string> values = CpuUtilization();
   vector<long> valueslong(10, 0);
   long total = 0;
   vector<CPUStates> all = {kUser_, kNice_, kSystem_, kIdle_, kIOwait_, kIRQ_, kSoftIRQ_, kSteal_};
