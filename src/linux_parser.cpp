@@ -126,7 +126,7 @@ float LinuxParser::MemoryUtilization() {
 long LinuxParser::UpTime() {
   std::vector<std::string> v;
   LinuxParser::GetKeyedValues(kProcDirectory, kUptimeFilename, v, ""); 
-  return std::stol(v[1]); 
+  return std::stol(v[0]);
 }
 
 // : Read and return the number of jiffies for the system
