@@ -20,8 +20,7 @@ string Format::ElapsedTime(long seconds) {
     seconds -= hrs * 3600;
     mins = seconds / 60;
     secs = seconds - mins * 60;
-    oss << std::setw(3) << days << " days, "
-      << std::setw(2) << std::setfill('0') << hrs << ":"
+    oss << std::setw(2) << std::setfill('0') << hrs << ":"
     << std::setw(2) << std::setfill('0') << mins << ":"
     << std::setw(2) << std::setfill('0') << secs;
     ret = oss.str();
