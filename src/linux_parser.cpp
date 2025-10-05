@@ -69,7 +69,7 @@ vector<int> LinuxParser::Pids() {
 }
 
 // in a delimeted string and delimiter, out vector of delimited sub strings
-void LinuxParser::tokenize(std::vector<std::string> tokens, std::string instr, char delim)
+void LinuxParser::tokenize(std::vector<std::string> &tokens, std::string instr, char delim)
 {
   tokens.clear();
   size_t start = 0;
