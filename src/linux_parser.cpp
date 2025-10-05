@@ -143,11 +143,14 @@ long LinuxParser::Jiffies() {
 
 // Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies() { 
-  vector<std::string> jiffies = CpuUtilization();
+  vector<string> values = CpuUtilization();
+  vector<long> valueslong(10, 0);
   long total = 0;
-  for (int i = kState_min_  ; i <= kState_max_;i ++)
-    total += std::stol(jiffies[i]);
-  return total; 
+  vector<CPUStates> all = {kUser_, kNice_, kSystem_, kIRQ_, kSoftIRQ_, kSteal_,
+                           kGuest_, kGuestNice_}; // exclude kIdle_, kIOwait_
+  for (int i : all)
+    total += stol(values[i]);
+  return total;
 }
 
 // Read and return the number of idle jiffies for the system
