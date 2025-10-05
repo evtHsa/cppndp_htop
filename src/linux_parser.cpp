@@ -224,8 +224,11 @@ long LinuxParser::UpTime(int pid) {
   std::vector<std::string> v;
   long ret;
   GetKeyedValues(kProcDirectory + std::to_string(pid) + "/", kStatFilename, v, "");
+  if (v.size() == 0)
+    return 0; // process has probably exited
   // https://man7.org/linux/man-pages/man5/proc_pid_stat.5.html
   ret = std::stol(v[21]);
   ret /= sysconf(_SC_CLK_TCK); // convert to seconds
+  ret = UpTime() - ret;
   return ret;
 }
