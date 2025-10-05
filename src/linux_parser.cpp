@@ -201,7 +201,11 @@ string LinuxParser::Uid(int pid) {
   std::vector<std::string> v;
   std::string fname = std::to_string(pid) + kStatusFilename;
   GetKeyedValues(kProcDirectory, fname, v, "Uid:");
-  return v[1];
+  if (v.size() != 0)
+    return v[1];
+  else
+    return string("???");
+  
 }
 
 // Read and return the user associated with a process
