@@ -216,7 +216,7 @@ string LinuxParser::User(int pid) {
 
   GetKeyedValues("/etc/", "passwd", v, uid);
   tokenize(tokens, v[0], ':');
-  return v[0];
+  return tokens[0];
 }
 
 // Read and return the uptime of a process
