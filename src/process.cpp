@@ -27,6 +27,7 @@ float Process::CpuUtilization() {
       long pid_uptime = LinuxParser::UpTime(pid_);
 
       LinuxParser::GetKeyedValues(LinuxParser::kProcDirectory, fname, v, ""); // empty key because 1 line file
+      if (v.size() == 0) return 0.0f;
       // for proc/pid/stat field definitions: https://manpages.ubuntu.com/manpages/noble/man5/proc_pid_stat.5.html
       u_time = std::stol(v[13]);  // user time for this process
       s_time = std::stol(v[14]);  // system time for this process
@@ -47,6 +48,7 @@ string Process::Command() {
       std::vector<std::string> v;
       std::string fname = std::to_string(pid_) + LinuxParser::kCmdlineFilename;
       LinuxParser::GetKeyedValues(LinuxParser::kProcDirectory, fname, v, "");
+      if (v.size() == 0) return string("???");
       return string(v[0]);
 }
 
@@ -55,6 +57,7 @@ string Process::Ram() {
       std::vector<std::string> v;
       std::string fname = std::to_string(pid_) + LinuxParser::kStatusFilename;
       LinuxParser::GetKeyedValues(LinuxParser::kProcDirectory, fname, v, "VmRSS:");
+      if (v.size() == 0) return string("???");
       return string(v[1]); 
 }
 

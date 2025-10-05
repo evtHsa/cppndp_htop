@@ -114,10 +114,12 @@ float LinuxParser::MemoryUtilization() {
   float total, free;
 
   GetKeyedValues(kProcDirectory, kMeminfoFilename, v, "MemTotal:");
+  if (v.size() == 0) return 0;
   total = std::stof(v[1]);
   v.clear();
 
   GetKeyedValues(kProcDirectory, kMeminfoFilename, v, "MemFree:");
+  if (v.size() == 0) return 0;
   free = std::stof(v[1]);
   return (total - free) / total; 
 }
@@ -126,6 +128,7 @@ float LinuxParser::MemoryUtilization() {
 long LinuxParser::UpTime() {
   std::vector<std::string> v;
   LinuxParser::GetKeyedValues(kProcDirectory, kUptimeFilename, v, ""); 
+  if (v.size() == 0) return 0;
   return std::stol(v[0]);
 }
 
@@ -186,6 +189,7 @@ vector<string> LinuxParser::CpuUtilization() {
 int LinuxParser::TotalProcesses() {
   std::vector<std::string> v;
   GetKeyedValues(kProcDirectory, kStatFilename, v, "processes");
+  if (v.size() == 0) return 0;
   return stol(v[1]);
 }
 
@@ -193,6 +197,7 @@ int LinuxParser::TotalProcesses() {
 int LinuxParser::RunningProcesses() {
   std::vector<std::string> v;
   GetKeyedValues(kProcDirectory, kStatFilename, v, "procs_running");
+  if (v.size() == 0) return 0;
   return std::stoi(v[1]); 
 }
 
@@ -215,6 +220,7 @@ string LinuxParser::User(int pid) {
   std::vector<std::string> tokens;
 
   GetKeyedValues("/etc/", "passwd", v, uid);
+  if (v.size() == 0) return std::string("???");
   tokenize(tokens, v[0], ':');
   return tokens[0];
 }
