@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/workspace/CppND-System-Monitor
+CMAKE_SOURCE_DIR = /home/workspace/cppndp_htop
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/workspace/CppND-System-Monitor
+CMAKE_BINARY_DIR = /home/workspace/cppndp_htop
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-System-Monitor/CMakeFiles /home/workspace/CppND-System-Monitor/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/cppndp_htop/CMakeFiles /home/workspace/cppndp_htop/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-System-Monitor/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/cppndp_htop/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
